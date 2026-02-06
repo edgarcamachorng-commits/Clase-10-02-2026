@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enfoques de Investigación: Cualitativo vs Cuantitativo</title>
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --secondary-dark: #1e293b;
+            --accent-color: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.2);
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #1a1a2e 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #e2e8f0, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 12px 48px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        h2 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2 i {
+            font-style: normal;
+            font-size: 1.4rem;
+            opacity: 0.8;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-card {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 10px;
+            padding: 1.8rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .comparison-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        .comparison-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .badge.quantitative {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .badge.qualitative {
+            background: rgba(45, 212, 191, 0.15);
+            color: #5eead4;
+            border: 1px solid rgba(45, 212, 191, 0.3);
+        }
+
+        ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .method-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .method-table th {
+            background: rgba(15, 23, 42, 0.8);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 500;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .method-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .method-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .method-table tr:hover {
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .integration-section {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(45, 212, 191, 0.1));
+            border: 1px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .gamma-container {
+            margin: 3rem auto;
+            max-width: 800px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(99, 102, 241, 0.2) 0%, transparent 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .integration-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Enfoques de Investigación</h1>
+            <p class="subtitle">Integración de los paradigmas cualitativo y cuantitativo en la metodología científica</p>
+        </header>
+
+        <div class="card">
+            <h2><i>📊</i> La Distinción Fundamental</h2>
+            <p>Los enfoques <span class="highlight">cualitativo</span> y <span class="highlight">cuantitativo</span> no son meros "métodos" en la lista de herramientas del investigador. Son <strong>paradigmas epistemológicos</strong> que responden a preguntas fundamentales sobre la naturaleza de la realidad y cómo podemos conocerla.</p>
+            
+            <p>Cada enfoque actúa como una <em>matriz orientadora</em> que define qué tipos de investigación son apropiados, qué métodos se privilegian y qué criterios de rigor se aplican.</p>
+        </div>
+
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <span class="badge quantitative">ENFOQUE CUANTITATIVO</span>
+                <h3>Positivismo & Post-Positivismo</h3>
+                <ul>
+                    <li>Realidad objetiva y medible</li>
+                    <li>Busca generalizar y predecir</li>
+                    <li>Énfasis en la medición numérica</li>
+                    <li>Establece relaciones causales</li>
+                    <li>Rigor: validez y confiabilidad estadística</li>
+                </ul>
+            </div>
+
+            <div class="comparison-card">
+                <span class="badge qualitative">ENFOQUE CUALITATIVO</span>
+                <h3>Interpretativismo & Constructivismo</h3>
+                <ul>
+                    <li>Realidad construida socialmente</li>
+                    <li>Busca comprender en profundidad</li>
+                    <li>Énfasis en el significado y contexto</li>
+                    <li>Describe fenómenos complejos</li>
+                    <li>Rigor: credibilidad y saturación teórica</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><i>🔗</i> Relación con los Tipos de Investigación</h2>
+            <p>Cada enfoque tiene afinidades naturales con ciertos tipos de investigación, aunque no existe una relación exclusiva:</p>
+            
+            <table class="method-table">
+                <thead>
+                    <tr>
+                        <th>Tipo de Investigación</th>
+                        <th>Afinidad Cuantitativa</th>
+                        <th>Afinidad Cualitativa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Pura o Teórica</strong></td>
+                        <td>✅ Alta (ej: física teórica)</td>
+                        <td>✅ Alta (ej: filosofía de la ciencia)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Aplicada o Práctica</strong></td>
+                        <td>✅ Muy Alta (ensayos clínicos)</td>
+                        <td>✅ Muy Alta (estudios de percepción)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Documental</strong></td>
+                        <td>⚫ Media (cliometría)</td>
+                        <td>✅ Muy Alta (análisis hermenéutico)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>De Campo</strong></td>
+                        <td>✅ Alta (censos, encuestas)</td>
+                        <td>✅ Alta (etnografía, observación)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Experimental</strong></td>
+                        <td>✅ Muy Alta (método científico clásico)</td>
+                        <td>⚠️ Baja (cuasi-experimentos)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2><i>⚙️</i> Operacionalización en Métodos Específicos</h2>
+            <p>El enfoque elegido determina cómo se implementan los métodos de investigación:</p>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h3>Métodos Cuantitativos</h3>
+                    <ul>
+                        <li><strong>Deductivo</strong>: Prueba de hipótesis teóricas</li>
+                        <li><strong>Experimental</strong>: Control riguroso de variables</li>
+                        <li><strong>Medición</strong>: Escalas numéricas estandarizadas</li>
+                        <li><strong>Estadístico</strong>: Análisis inferencial</li>
+                        <li><strong>Encuestas</strong>: Estructuradas y cerradas</li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-card">
+                    <h3>Métodos Cualitativos</h3>
+                    <ul>
+                        <li><strong>Inductivo</strong>: Generación teórica desde datos</li>
+                        <li><strong>Histórico</strong>: Interpretación contextual</li>
+                        <li><strong>Observación</strong>: Participante y naturalista</li>
+                        <li><strong>Entrevistas</strong>: En profundidad y abiertas</li>
+                        <li><strong>Análisis de contenido</strong>: Hermenéutico</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="integration-section">
+            <h2><i>🎯</i> Papel Integrador</h2>
+            <p>Los enfoques cualitativo y cuantitativo son el <strong>puente metodológico</strong> entre el tipo de investigación seleccionado y los métodos específicos a emplear.</p>
+            
+            <p>No compiten con la taxonomía de métodos, sino que la <span class="highlight">complementan y dan sentido práctico</span> a su aplicación, asegurando coherencia epistemológica en todo el diseño investigativo.</p>
+            
+            <p style="margin-top: 1.5rem; font-size: 1.1rem;">
+                <strong>💡 Investigación de Métodos Mixtos:</strong> La integración de ambos enfoques permite una comprensión más completa y robusta de los fenómenos complejos.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2><i>🧩</i> Conclusión: El Rompecabezas Metodológico</h2>
+            <p>Imagina la metodología de investigación como un rompecabezas complejo:</p>
+            
+            <ul>
+                <li><strong>Los tipos de investigación</strong> son las piezas base que definen la forma general</li>
+                <li><strong>Los métodos específicos</strong> son las piezas especializadas con funciones particulares</li>
+                <li><strong>Los enfoques cualitativo/cuantitativo</strong> son las <em>imágenes-guía</em> que te muestran cómo ensamblar coherentemente todas las piezas</li>
+            </ul>
+            
+            <p style="margin-top: 1.5rem;">La elección del enfoque no es técnica sino <strong>filosófica y estratégica</strong>, determinada por la naturaleza de tu pregunta de investigación y tu visión de lo que es posible conocer.</p>
+        </div>
+
+        <div class="gamma-container">
+            <h2 style="text-align: center; padding: 1.5rem; margin: 0; border-bottom: 1px solid var(--border-color);">
+                <i>📚</i> Recursos Complementarios
+            </h2>
+            <iframe 
+                src="https://gamma.app/embed/oeo9dmagclow4kx" 
+                style="width: 100%; height: 450px; border: none; display: block;"
+                allow="fullscreen" 
+                title="Métodos de Investigación">
+            </iframe>
+        </div>
+
+        <footer class="footer">
+            <p>© 2024 · Integración Metodológica en Investigación Científica</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.7;">
+                Diseño didáctico para la comprensión de paradigmas de investigación
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
